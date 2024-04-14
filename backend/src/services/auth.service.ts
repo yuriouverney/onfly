@@ -15,7 +15,7 @@ class AuthService {
       const user = await User.scope('withPass').findOne({ where: { user: username } });
 
       if (!user) {
-        return ThrowError.throwAuthenticationError(ErrorMessages.authentication.userNotFound);
+        return ThrowError.throwAuthenticationError(ErrorMessages.authentication.invalidCredentials);
       }
 
       if (user && !user.active) {
@@ -25,7 +25,7 @@ class AuthService {
       const passwordValid = await user.validatePassword(password);
 
       if (!passwordValid) {
-        return ThrowError.throwAuthenticationError(ErrorMessages.authentication.invalidPassword);
+        return ThrowError.throwAuthenticationError(ErrorMessages.authentication.invalidCredentials);
       }
       
       const token = jwt.sign({ id: user.id }, config.security.jwtSignKey, { expiresIn: config.security.jwtAccessTokenExpiresIn });

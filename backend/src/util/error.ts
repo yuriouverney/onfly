@@ -5,24 +5,23 @@ interface LoginResponse {
 
 const ErrorMessages = {
   authentication: {
-    userNotFound: 'Usuário não encontrado',
-    inactiveUser: 'Usuário inativo',
-    invalidPassword: 'Senha inválida',
-    invalidCredentials: 'Credenciais inválidas',
-    authenticationError: 'Erro de Autenticação',
-    subscriptionExpired:'Assinatura expirada, favor atualizar seu plano'
+    userNotFound: 'User not found',
+    inactiveUser: 'Inactive user',
+    invalidPassword: 'Invalid password',
+    invalidCredentials: 'Invalid credentials',
+    authenticationError: 'Authentication error',
   },
   database: {
-    connectionError: 'Erro ao conectar ao banco de dados',
-    queryError: 'Erro na execução da consulta',
-    duplicateEntry: 'Entrada duplicada',
-    databaseError: 'Erro de Banco de Dados',
+    connectionError: 'Error connecting to the database',
+    queryError: 'Error executing query',
+    duplicateEntry: 'Duplicate entry',
+    databaseError: 'Database error',
   },
   notFound: {
-    resourceNotFound: 'Recurso não encontrado',
+    resourceNotFound: 'Resource not found',
   },
   validation: {
-    validationError: 'Erro de Validação',
+    validationError: 'Validation error',
   },
 };
 
