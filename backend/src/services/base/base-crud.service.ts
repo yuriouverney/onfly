@@ -2,7 +2,6 @@ import { FindOptions, Model, ModelStatic, Sequelize } from 'sequelize';
 import DatabaseManager from '../../db/database-manager';
 
 export abstract class BaseCrudService<T extends ModelStatic<Model<any, any>>> {
-    protected orgaoId?: number;
     protected db?: string;
     protected sequelizeInstance: Sequelize;
     model: T;

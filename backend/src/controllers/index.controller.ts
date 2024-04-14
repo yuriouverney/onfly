@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import AuthOrgaoController  from './auth.controller';
+import AuthController  from './auth.controller';
 import ExpensesController  from './expenses.controller';
 
 const router = Router();
 
 //Auth
-router.use('/auth', AuthOrgaoController);
+router.use('/auth', AuthController);
 
 //Expenses
 router.use('/expenses', ExpensesController);
