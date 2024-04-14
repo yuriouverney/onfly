@@ -21,7 +21,7 @@ const ResponseHelpers = {
 
   deleted: (res: Response, body?: any): void => {
     if (body) {
-      return ResponseHelpers.ok(res, body);
+      return ResponseHelpers.ok(res, [body]);
     } else {
       return ResponseHelpers.end(res);
     }

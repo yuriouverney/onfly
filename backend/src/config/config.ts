@@ -32,12 +32,20 @@ interface ServerConfig {
     enableConsoleLog: string;
     enableCloudWatchLog: string;
   }
+
+  interface EmailConfig {
+    host: string;
+    port: string;
+    email: string;
+    password: string;
+  }
   
   interface AppConfig {
     server: ServerConfig;
     database: DatabaseConfig;
     security: SecurityConfig;
     log: LogConfig;
+    email: EmailConfig
   }
   
   const config: AppConfig = {
@@ -48,6 +56,12 @@ interface ServerConfig {
       logLevel: process.env.LOG_LEVEL!,
       enableConsoleLog: process.env.ENABLE_CONSOLE_LOG!,
       enableCloudWatchLog: process.env.ENABLE_CLOUDWATCH_LOG!,
+    },
+    email: {
+      host: process.env.SMTP_HOST!,
+      port: process.env.SMTP_PORT!,
+      email: process.env.SMTP_USER!,
+      password: process.env.SMTP_PASSWORD!,
     },
     database: {
       host: process.env.DB_HOSTNAME!,

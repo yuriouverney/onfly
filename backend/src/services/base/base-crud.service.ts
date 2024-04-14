@@ -15,7 +15,7 @@ export abstract class BaseCrudService<T extends ModelStatic<Model<any, any>>> {
     }
 
     getSequelizeInstance(): Sequelize {
-        return DatabaseManager.getDatabaseGeral();
+        return DatabaseManager.getDatabase();
     }
 
     async findAll(filter?: FindOptions) {

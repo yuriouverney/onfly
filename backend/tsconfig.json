@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "strict": true,
-    "experimentalDecorators": true,
-    "typeRoots" : ["./src/**/*", "./src/types"]
+     "target": "es6",
+     "module": "commonjs",
+     "esModuleInterop": true,
+     "strict": true,
+     "experimentalDecorators": true,
+     "types": ["jest"],
+     "typeRoots" : ["./src/**/*", "./src/types", "./node_modules/@types"]
   },
   "include": [
-    "./src/**/*",
-  ],
-}
+     "./src/**/*",
+  ]
+ }
+ 

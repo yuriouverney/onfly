@@ -1,6 +1,7 @@
-import { Model, Table, Column, DataType, PrimaryKey, AutoIncrement, ForeignKey, Validate, AfterCreate, BelongsTo} from 'sequelize-typescript';
+import { Model, Table, Column, DataType, PrimaryKey, AutoIncrement, ForeignKey, Validate, AfterCreate, BelongsTo, BeforeCreate} from 'sequelize-typescript';
 import User from './user.model';
 import { sendEmail } from '../services/email.service';
+import { ThrowError } from '../util/error';
 
 @Table({
   tableName: 'Expense',
@@ -63,6 +64,15 @@ export default class Expense extends Model<Expense> {
 
   @BelongsTo(() => User)
   user!: User;
+
+  @BeforeCreate
+  static async validateUser(expense: Expense) {
+    const user = await User.findByPk(expense.userId);
+    if (!user) {
+      ThrowError.throwDatabaseError('Invalid user ID: User must exist to register an expense.')
+    }
+  }
+
   
   @AfterCreate
   static async sendEmailAfterCreate(expense: Expense): Promise<void> {

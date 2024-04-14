@@ -4,7 +4,7 @@ import * as path from 'path';
 import environment from '../util/environment';
 environment.init();
 import config from '../config/config';
-import logger from '../util/logger';
+//import logger from '../util/logger';
 
 class DatabaseManager {
   private db: any;
@@ -14,7 +14,7 @@ class DatabaseManager {
     }
 
     async initializeDatabase(directory = '../models') {
-        logger.info('Starting database...');
+        console.log('Starting database...');
         const dbName = config.database?.db;
         const sequelize = new Sequelize({
             dialect: 'mysql',
@@ -40,14 +40,19 @@ class DatabaseManager {
 
         await sequelize.sync({ force: false });
         this.db.set(dbName, sequelize);
-        logger.info('Database initialized successfully.');
+        console.log('Database initialized successfully.');
     }
 
-    getDatabaseGeral() {
+    getDatabase() {
         const dbName = config.database?.db;
         if (!this.db.has(dbName)) {
             throw new Error(`Database for ${dbName} not initialized`);
         }
+        return this.db.get(dbName);
+    }
+
+    getDatabaseTest() {
+        const dbName = config.database?.db;
         return this.db.get(dbName);
     }
 }

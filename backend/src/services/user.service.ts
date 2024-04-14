@@ -5,9 +5,4 @@ export class UserService extends BaseCrudService<typeof User> {
   constructor() {
     super(User);
   }
-
-  async info() {
-    return
-  }
-
 }

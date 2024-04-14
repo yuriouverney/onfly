@@ -1,8 +1,17 @@
 {
-    "development": {
+    "dev": {
       "username": "root",
       "password": "admin",
       "database": "onfly_dev",
+      "host": "127.0.0.1",
+      "dialect": "mysql",
+      "seederStorage": "sequelize",
+      "seederStorageTableName": "SequelizeData"
+    },
+    "test": {
+      "username": "root",
+      "password": "admin",
+      "database": "onfly_test",
       "host": "127.0.0.1",
       "dialect": "mysql",
       "seederStorage": "sequelize",

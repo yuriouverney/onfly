@@ -8,6 +8,7 @@ import ResponseHelpers from '../util/response';
 
 const router = Router();
 
+// Only for ADMs
 router.get(
   '/',
   verifyToken,
@@ -31,6 +32,18 @@ router.get(
   })
 );
 
+// Only for ADMs
+router.get(
+  '/adm/:id',
+  verifyToken,
+  checkHasPermission('read:anyexpensebyid'),
+  wrapAsync(async (req: Request, res: Response) => {
+    const expenseService = new ExpenseService()
+    const id  = +req.params.id;
+    const response = await expenseService.getExpenseById(id)
+    ResponseHelpers.ok(res, response);
+  })
+);
 
 router.get(
   '/:id',
@@ -39,7 +52,8 @@ router.get(
   wrapAsync(async (req: Request, res: Response) => {
     const expenseService = new ExpenseService()
     const id  = +req.params.id;
-    const response = await expenseService.getExpenseById(id)
+    const userId = req.user.id;
+    const response = await expenseService.getUserExpenseById(id, userId)
     ResponseHelpers.ok(res, response);
   })
 );
@@ -57,6 +71,20 @@ router.post(
   })
 );
 
+// Only for ADMs
+router.put(
+  '/adm/:id',
+  verifyToken,
+  checkHasPermission('update:anyexpense'),
+  wrapAsync(async (req: Request, res: Response) => {
+    const expenseService = new ExpenseService()
+    const values = req.body;
+    const id  = +req.params.id;
+    const userId = req.user.id
+    const response = await expenseService.updateExpense(id, values, userId)
+    ResponseHelpers.updated(res, response);
+  })
+);
 
 router.put(
   '/:id',
@@ -67,7 +95,7 @@ router.put(
     const values = req.body;
     const id  = +req.params.id;
     const userId = req.user.id
-    const response = await expenseService.updateExpense(id, values, userId)
+    const response = await expenseService.updateUserExpense(id, values, userId)
     ResponseHelpers.updated(res, response);
   })
 );
@@ -79,8 +107,23 @@ router.delete(
   wrapAsync(async (req: Request, res: Response) => {
     const expenseService = new ExpenseService()
     const id  = +req.params.id;
+    const userId = req.user.id;
+    const response = await expenseService.deleteByUser(id, userId)
+    ResponseHelpers.deleted(res, response);
+  })
+);
+
+// Only for ADMs
+router.delete(
+  '/adm/:id',
+  verifyToken,
+  checkHasPermission('delete:anyexpense'),
+  wrapAsync(async (req: Request, res: Response) => {
+    const expenseService = new ExpenseService()
+    const id  = +req.params.id;
     const response = await expenseService.deleteById(id)
     ResponseHelpers.deleted(res, response);
   })
 );
+
 export default router;

@@ -22,6 +22,12 @@ module.exports = {
       updatedAt: new Date()
     }, {
       type: 'expense',
+      action: 'read',
+      name: 'read:anyexpensebyid',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      type: 'expense',
       action: 'create',
       name: 'create:expense',
       createdAt: new Date(),
@@ -34,8 +40,20 @@ module.exports = {
       updatedAt: new Date()
     }, {
       type: 'expense',
+      action: 'update',
+      name: 'update:anyexpense',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      type: 'expense',
       action: 'delete',
       name: 'delete:expense',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      type: 'expense',
+      action: 'delete',
+      name: 'delete:anyexpense',
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});

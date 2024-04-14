@@ -21,11 +21,29 @@ module.exports = {
       profileId: 1,
       permissionId: 6
     }, {
+      profileId: 1,
+      permissionId: 7
+    }, {
+      profileId: 1,
+      permissionId: 8
+    }, {
+      profileId: 1,
+      permissionId: 9
+    }, {
       profileId: 2,
       permissionId: 2
     }, {
       profileId: 2,
-      permissionId: 4
+      permissionId: 3
+    }, {
+      profileId: 2,
+      permissionId: 5
+    }, {
+      profileId: 2,
+      permissionId: 6
+    }, {
+      profileId: 2,
+      permissionId: 8
     }], {});
   },
 
