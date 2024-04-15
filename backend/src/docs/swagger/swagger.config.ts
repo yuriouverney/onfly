@@ -18,7 +18,7 @@ export const swaggerOptions = {
     },
     security: [
       {
-        authorization: [],
+        authorization: 'array',
       },
     ],
     tags: [
@@ -32,6 +32,5 @@ export const swaggerOptions = {
       },
     ],
   },
-  // Verify and adjust the paths in the `apis` array
   apis: ['src/controllers/*.ts'],
 };

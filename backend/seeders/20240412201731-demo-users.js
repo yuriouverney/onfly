@@ -1,5 +1,5 @@
 'use strict';
-import bcrypt from 'bcryptjs';
+const bcrypt = require('bcryptjs');
 
 module.exports = {
   async up(queryInterface) {
