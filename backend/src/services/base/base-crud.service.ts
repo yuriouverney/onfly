@@ -2,42 +2,42 @@ import { FindOptions, Model, ModelStatic, Sequelize } from 'sequelize';
 import DatabaseManager from '../../db/database-manager';
 
 export abstract class BaseCrudService<T extends ModelStatic<Model<any, any>>> {
-    protected db?: string;
-    protected sequelizeInstance: Sequelize;
-    model: T;
+  protected db?: string;
+  protected sequelizeInstance: Sequelize;
+  model: T;
 
-    constructor(model: T) {
-        this.model = model;
-        
-        this.sequelizeInstance = this.getSequelizeInstance();
-        (this.model as any).sequelize = this.sequelizeInstance;
-    }
+  constructor(model: T) {
+    this.model = model;
 
-    getSequelizeInstance(): Sequelize {
-        return DatabaseManager.getDatabase();
-    }
+    this.sequelizeInstance = this.getSequelizeInstance();
+    (this.model as any).sequelize = this.sequelizeInstance;
+  }
 
-    async findAll(filter?: FindOptions) {
-        return this.model.findAll(filter);
-    }
+  getSequelizeInstance(): Sequelize {
+    return DatabaseManager.getDatabase();
+  }
 
-    async findOne(filter?: FindOptions) {
-        return this.model.findOne(filter);
-    }
+  async findAll(filter?: FindOptions) {
+    return this.model.findAll(filter);
+  }
 
-    async findById(id: number, filter?: FindOptions) {
-        return this.model.findByPk(id, filter);
-    }
+  async findOne(filter?: FindOptions) {
+    return this.model.findOne(filter);
+  }
 
-    async updatedById(id: number, values: any) {
-        return this.model.update(values, { where: { id: id } });
-    }
+  async findById(id: number, filter?: FindOptions) {
+    return this.model.findByPk(id, filter);
+  }
 
-    async create(values: any) {
-        return this.model.create(values);
-    }
+  async updatedById(id: number, values: any) {
+    return this.model.update(values, { where: { id: id } });
+  }
 
-    async deleteById(id: number) {
-        return this.model.destroy({where: {id}});
-    }
+  async create(values: any) {
+    return this.model.create(values);
+  }
+
+  async deleteById(id: number) {
+    return this.model.destroy({ where: { id } });
+  }
 }

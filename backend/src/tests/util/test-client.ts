@@ -19,9 +19,7 @@ class TestClient {
   }
 
   async authenticate(credentials: ICredentials) {
-    const res = await request(api)
-      .post('/api/auth/login')
-      .send(credentials);
+    const res = await request(api).post('/api/auth/login').send(credentials);
     this.token = res.body.access_token;
     return res;
   }

@@ -21,7 +21,7 @@ const router = Router();
  *                 example: 'johndoe'
  *                 type: string
  *               password:
- *                 example: '123'  
+ *                 example: '123'
  *                 type: string
  *     responses:
  *       200:
@@ -41,8 +41,8 @@ router.post(
   '/login',
   wrapAsync(async (req: Request, res: Response) => {
     const { username, password } = req.body;
-    const access_token = await AuthGeralService.login(username, password)
-    res.json({access_token});
+    const access_token = await AuthGeralService.login(username, password);
+    res.json({ access_token });
   })
 );
 

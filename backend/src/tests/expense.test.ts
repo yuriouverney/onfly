@@ -3,7 +3,7 @@ import Expense from '../models/expense.model';
 import TestClient from './util/test-client';
 
 describe('Expense API', () => {
-  let client = new TestClient();
+  const client = new TestClient();
   let expenseCreated: Expense;
 
   beforeAll(async () => {
@@ -16,12 +16,11 @@ describe('Expense API', () => {
   beforeEach(async () => {
     const loginDetails = {
       username: 'johndoe',
-      password: '123'
+      password: '123',
     };
 
     await client.authenticate(loginDetails);
   });
-
 
   it('should list all expenses when authenticated', async () => {
     const response = await client.get('/api/expenses');
@@ -32,7 +31,7 @@ describe('Expense API', () => {
   it('should list all expenses NOT AUTHENTICATED', async () => {
     const loginDetails = {
       username: 'janedoe',
-      password: '123'
+      password: '123',
     };
 
     await client.authenticate(loginDetails);
@@ -51,22 +50,22 @@ describe('Expense API', () => {
     const newExpense = {
       description: 'New Laptop',
       date: '2024-01-01',
-      value: 1500.00
+      value: 1500.0,
     };
 
     const response = await client.post('/api/expenses', newExpense);
-    expenseCreated = response.body
+    expenseCreated = response.body;
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('id');
   });
-  
+
   it('should be an error when creating if the date is in the future', async () => {
     const today = new Date();
     const newExpense = {
       id: 99,
       description: 'New Laptop',
       date: today.setDate(today.getDate() + 2),
-      value: '1500.00'
+      value: '1500.00',
     };
 
     const response = await client.post('/api/expenses', newExpense);
@@ -77,9 +76,10 @@ describe('Expense API', () => {
   it('should give an error if the description is longer than 191 characters', async () => {
     const newExpense = {
       id: 100,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt tellus a urna eleifend elementum. Etiam et dolor nec enim hendrerit accumsan vitae et erat. Nulla lacinia vestibulum porttitor.',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt tellus a urna eleifend elementum. Etiam et dolor nec enim hendrerit accumsan vitae et erat. Nulla lacinia vestibulum porttitor.',
       date: '2024-01-01',
-      value: 1500.00
+      value: 1500.0,
     };
 
     const response = await client.post('/api/expenses', newExpense);
@@ -96,7 +96,7 @@ describe('Expense API', () => {
   it('should give an error by permission', async () => {
     const loginDetails = {
       username: 'janedoe',
-      password: '123'
+      password: '123',
     };
 
     await client.authenticate(loginDetails);
@@ -108,7 +108,7 @@ describe('Expense API', () => {
   it('should give an error because is not a creator', async () => {
     const loginDetails = {
       username: 'janedoe',
-      password: '123'
+      password: '123',
     };
 
     await client.authenticate(loginDetails);
@@ -126,12 +126,12 @@ describe('Expense API', () => {
   it('should give an error by permission', async () => {
     const loginDetails = {
       username: 'janedoe',
-      password: '123'
+      password: '123',
     };
 
     const expenseUpdate = {
-      value: '100.00'
-    } 
+      value: '100.00',
+    };
 
     await client.authenticate(loginDetails);
     const response = await client.put(`/api/expenses/adm/${expenseCreated.id}`, expenseUpdate);
@@ -141,8 +141,8 @@ describe('Expense API', () => {
 
   it('should edit the expense', async () => {
     const expenseUpdate = {
-      value: '100.00'
-    } 
+      value: '100.00',
+    };
     const response = await client.put(`/api/expenses/adm/${expenseCreated.id}`, expenseUpdate);
     expect(response.status).toBe(200);
     expect(response.body).toEqual([1]);
@@ -150,8 +150,8 @@ describe('Expense API', () => {
 
   it('should edit the expense', async () => {
     const expenseUpdate = {
-      value: '150.00'
-    } 
+      value: '150.00',
+    };
     const response = await client.put(`/api/expenses/${expenseCreated.id}`, expenseUpdate);
     expect(response.status).toBe(200);
     expect(response.body).toEqual([1]);
@@ -160,12 +160,12 @@ describe('Expense API', () => {
   it('should give an error because is not a creator', async () => {
     const loginDetails = {
       username: 'janedoe',
-      password: '123'
+      password: '123',
     };
 
     const expenseUpdate = {
-      value: '100.00'
-    } 
+      value: '100.00',
+    };
 
     await client.authenticate(loginDetails);
     const response = await client.put(`/api/expenses/${expenseCreated.id}`, expenseUpdate);
@@ -173,11 +173,10 @@ describe('Expense API', () => {
     expect(response.body).toHaveProperty('error');
   });
 
-  
   it('should give an error by permission', async () => {
     const loginDetails = {
       username: 'janedoe',
-      password: '123'
+      password: '123',
     };
 
     await client.authenticate(loginDetails);
@@ -189,7 +188,7 @@ describe('Expense API', () => {
   it('should give an error because is not a creator', async () => {
     const loginDetails = {
       username: 'janedoe',
-      password: '123' 
+      password: '123',
     };
 
     await client.authenticate(loginDetails);
@@ -203,5 +202,4 @@ describe('Expense API', () => {
     expect(response.status).toBe(200);
     expect(response.body).toEqual([1]);
   });
-
 });

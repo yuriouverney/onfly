@@ -10,9 +10,11 @@ const logger: Logger = createLogger({
 });
 
 if (process.env.NODE_ENV !== 'prod') {
-  logger.add(new transports.Console({
-    format: format.simple(),
-  }));
+  logger.add(
+    new transports.Console({
+      format: format.simple(),
+    })
+  );
 }
 
 export default logger;

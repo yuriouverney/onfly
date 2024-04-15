@@ -18,7 +18,7 @@ interface DecodedToken {
 declare global {
   namespace Express {
     interface Request {
-      user: any,
+      user: any;
     }
   }
 }
@@ -35,21 +35,23 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
     const decoded = jwt.verify(token, config.security.jwtSignKey) as DecodedToken;
     const userService = new UserService();
     const filter = {
-        attributes: ['id', 'name'],
-        include: [{
-            model: Profile,
-            attributes: ['description'],
-            include: [{model: Permission, attributes: ['name']}]
-        }] 
-    }
+      attributes: ['id', 'name'],
+      include: [
+        {
+          model: Profile,
+          attributes: ['description'],
+          include: [{ model: Permission, attributes: ['name'] }],
+        },
+      ],
+    };
 
-    const user = await userService.findById(decoded.id, filter) as User;
- 
+    const user = (await userService.findById(decoded.id, filter)) as User;
+
     if (!user) {
       return res.status(401).json({ message: 'Invalid token' });
     }
 
-    const permissionsName = user.Profile.Permissions.map(permission => permission.name);
+    const permissionsName = user.Profile.Permissions.map((permission) => permission.name);
 
     const reqUser = {
       name: user.name,
@@ -63,10 +65,9 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
   } catch (err) {
     return res.status(401).json({ message: 'Invalid token' });
   }
-  
 };
 
-const authorize = (roles: string[]) => {
+const authorize = () => {
   return (req: Request, res: Response, next: NextFunction) => {
     const user = req.user;
     if (!user) {

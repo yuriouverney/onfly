@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 
-import {swaggerOptions} from './docs/swagger/swagger.config';
+import { swaggerOptions } from './docs/swagger/swagger.config';
 import { helmetConfig } from './docs/helmet.config';
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);

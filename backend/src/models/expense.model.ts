@@ -1,4 +1,16 @@
-import { Model, Table, Column, DataType, PrimaryKey, AutoIncrement, ForeignKey, Validate, AfterCreate, BelongsTo, BeforeCreate} from 'sequelize-typescript';
+import {
+  Model,
+  Table,
+  Column,
+  DataType,
+  PrimaryKey,
+  AutoIncrement,
+  ForeignKey,
+  Validate,
+  AfterCreate,
+  BelongsTo,
+  BeforeCreate,
+} from 'sequelize-typescript';
 import User from './user.model';
 import { sendEmail } from '../services/email.service';
 import { ThrowError } from '../util/error';
@@ -12,7 +24,6 @@ import { ThrowError } from '../util/error';
     plural: 'Expenses',
   },
 })
-
 export default class Expense extends Model<Expense> {
   @PrimaryKey
   @AutoIncrement
@@ -29,9 +40,9 @@ export default class Expense extends Model<Expense> {
     isDate: true,
     isNotFuture(value: string) {
       if (new Date(value) > new Date()) {
-        throw new Error("Date cannot be in the future.");
+        throw new Error('Date cannot be in the future.');
       }
-    }
+    },
   })
   @Column({
     type: DataType.DATE,
@@ -42,11 +53,11 @@ export default class Expense extends Model<Expense> {
   @Validate({
     min: {
       args: [0],
-      msg: "Value cannot be negative."
-    }
+      msg: 'Value cannot be negative.',
+    },
   })
   @Column({
-    type: DataType.DECIMAL(10,2),
+    type: DataType.DECIMAL(10, 2),
     allowNull: false,
   })
   value!: string;
@@ -70,11 +81,10 @@ export default class Expense extends Model<Expense> {
   static async validateUser(expense: Expense) {
     const user = await User.findByPk(expense.userId);
     if (!user) {
-      ThrowError.throwDatabaseError('Invalid user ID: User must exist to register an expense.')
+      ThrowError.throwDatabaseError('Invalid user ID: User must exist to register an expense.');
     }
   }
 
- 
   @AfterCreate
   static async sendEmailAfterCreate(expense: Expense): Promise<void> {
     if (expense.userId) {

@@ -3,16 +3,15 @@ import Profile from './profile.model';
 import Permission from './permission.model';
 
 @Table({
-    tableName: 'ProfilePermission',
-    freezeTableName: true,
-    modelName: 'ProfilePermission',
-    timestamps: false,
-    name: {
-      singular: 'ProfilePermission',
-      plural: 'ProfilePermissions',
-    },
+  tableName: 'ProfilePermission',
+  freezeTableName: true,
+  modelName: 'ProfilePermission',
+  timestamps: false,
+  name: {
+    singular: 'ProfilePermission',
+    plural: 'ProfilePermissions',
+  },
 })
-  
 export default class ProfilePermission extends Model<ProfilePermission> {
   @ForeignKey(() => Profile)
   @Column(DataType.INTEGER)

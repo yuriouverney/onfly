@@ -11,7 +11,6 @@ import ProfilePermission from './profile-permission.model';
     plural: 'Profiles',
   },
 })
-
 export default class Profile extends Model<Profile> {
   @PrimaryKey
   @AutoIncrement
@@ -26,5 +25,4 @@ export default class Profile extends Model<Profile> {
 
   @BelongsToMany(() => Permission, () => ProfilePermission)
   Permissions!: Permission[];
-  
 }

@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import AuthController  from './auth.controller';
-import ExpensesController  from './expenses.controller';
+import AuthController from './auth.controller';
+import ExpensesController from './expenses.controller';
 
 const router = Router();
 

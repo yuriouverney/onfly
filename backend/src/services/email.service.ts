@@ -9,8 +9,8 @@ const transporter = nodemailer.createTransport({
   secure: config.email.port === '465',
   auth: {
     user: config.email.email,
-    pass: config.email.password
-  }
+    pass: config.email.password,
+  },
 });
 
 export const sendEmail = async (to: string, subject: string, text: string) => {

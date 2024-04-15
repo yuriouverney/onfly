@@ -1,8 +1,3 @@
-interface LoginResponse {
-  nome: string;
-  token: string;
-}
-
 const ErrorMessages = {
   authentication: {
     userNotFound: 'User not found',
@@ -31,19 +26,19 @@ const ThrowError = {
     (error as any).statusCode = 500;
     throw error;
   },
-  
+
   throwNotFoundError: (message: string = ErrorMessages.notFound.resourceNotFound) => {
     const error = new Error(message);
     (error as any).statusCode = 404;
     throw error;
   },
-  
+
   throwValidationError: (message: string = ErrorMessages.validation.validationError) => {
     const error = new Error(message);
     (error as any).statusCode = 400;
     throw error;
   },
-  
+
   throwAuthenticationError: (message: string = ErrorMessages.authentication.authenticationError) => {
     const error = new Error(message);
     (error as any).statusCode = 401;
@@ -53,7 +48,7 @@ const ThrowError = {
 
 export default {
   ErrorMessages,
-  ThrowError
+  ThrowError,
 };
 
 export { ErrorMessages, ThrowError };

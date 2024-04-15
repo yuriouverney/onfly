@@ -1,4 +1,17 @@
-import { Model, Table, Scopes, Column, DataType, BeforeCreate, BeforeSave, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
+import {
+  Model,
+  Table,
+  Scopes,
+  Column,
+  DataType,
+  BeforeCreate,
+  BeforeSave,
+  PrimaryKey,
+  AutoIncrement,
+  ForeignKey,
+  BelongsTo,
+  HasMany,
+} from 'sequelize-typescript';
 import bcrypt from 'bcryptjs';
 import Profile from './profile.model';
 import Expense from './expense.model';
@@ -8,7 +21,6 @@ import Expense from './expense.model';
     attributes: { include: ['password'] },
   },
 }))
-
 @Table({
   tableName: 'User',
   freezeTableName: true,
@@ -21,7 +33,6 @@ import Expense from './expense.model';
     attributes: { exclude: ['password'] },
   },
 })
-
 export default class User extends Model<User> {
   @PrimaryKey
   @AutoIncrement
@@ -80,5 +91,4 @@ export default class User extends Model<User> {
   validatePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
   }
-
 }

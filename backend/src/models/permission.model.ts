@@ -3,13 +3,13 @@ import Profile from './profile.model';
 import ProfilePermission from './profile-permission.model';
 
 @Table({
-    tableName: 'Permissao',
-    freezeTableName: true,
-    modelName: 'Permissao',
-    name: {
-      singular: 'Permissao',
-      plural: 'Permissoes',
-    },
+  tableName: 'Permissao',
+  freezeTableName: true,
+  modelName: 'Permissao',
+  name: {
+    singular: 'Permissao',
+    plural: 'Permissoes',
+  },
 })
 export default class Permissao extends Model<Permissao> {
   @PrimaryKey

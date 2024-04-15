@@ -4,7 +4,7 @@ interface HttpError extends Error {
 }
 
 function wrapAsync(fn: (req: Request, res: Response, next?: NextFunction) => Promise<any>) {
-  return function(req: Request, res: Response, next: NextFunction): void {
+  return function (req: Request, res: Response, next: NextFunction): void {
     fn(req, res, next).catch((err: HttpError) => {
       res.status(err.statusCode || 500).json({
         error: {

@@ -5,7 +5,6 @@ import { checkHasPermission } from '../util/middleware/check-has-permission';
 import { ExpenseService } from '../services/expense.service';
 import ResponseHelpers from '../util/response';
 
-
 const router = Router();
 
 /**
@@ -35,8 +34,8 @@ router.get(
   verifyToken,
   checkHasPermission('read:allexpenses'),
   wrapAsync(async (req: Request, res: Response) => {
-    const expenseService = new ExpenseService()
-    const response = await expenseService.findAll()
+    const expenseService = new ExpenseService();
+    const response = await expenseService.findAll();
     ResponseHelpers.ok(res, response);
   })
 );
@@ -67,8 +66,8 @@ router.get(
   verifyToken,
   checkHasPermission('read:allbyuser'),
   wrapAsync(async (req: Request, res: Response) => {
-    const expenseService = new ExpenseService()
-    const response = await expenseService.allExpensesByUser(req.user)
+    const expenseService = new ExpenseService();
+    const response = await expenseService.allExpensesByUser(req.user);
     ResponseHelpers.ok(res, response);
   })
 );
@@ -104,9 +103,9 @@ router.get(
   verifyToken,
   checkHasPermission('read:anyexpensebyid'),
   wrapAsync(async (req: Request, res: Response) => {
-    const expenseService = new ExpenseService()
-    const id  = +req.params.id;
-    const response = await expenseService.getExpenseById(id)
+    const expenseService = new ExpenseService();
+    const id = +req.params.id;
+    const response = await expenseService.getExpenseById(id);
     ResponseHelpers.ok(res, response);
   })
 );
@@ -141,10 +140,10 @@ router.get(
   verifyToken,
   checkHasPermission('read:expensebyid'),
   wrapAsync(async (req: Request, res: Response) => {
-    const expenseService = new ExpenseService()
-    const id  = +req.params.id;
+    const expenseService = new ExpenseService();
+    const id = +req.params.id;
     const userId = req.user.id;
-    const response = await expenseService.getUserExpenseById(id, userId)
+    const response = await expenseService.getUserExpenseById(id, userId);
     ResponseHelpers.ok(res, response);
   })
 );
@@ -179,10 +178,10 @@ router.post(
   verifyToken,
   checkHasPermission('create:expense'),
   wrapAsync(async (req: Request, res: Response) => {
-    const expenseService = new ExpenseService()
+    const expenseService = new ExpenseService();
     const values = req.body;
-    values.userId = req.user.id
-    const response = await expenseService.create(values)
+    values.userId = req.user.id;
+    const response = await expenseService.create(values);
     ResponseHelpers.created(res, response);
   })
 );
@@ -224,11 +223,11 @@ router.put(
   verifyToken,
   checkHasPermission('update:anyexpense'),
   wrapAsync(async (req: Request, res: Response) => {
-    const expenseService = new ExpenseService()
+    const expenseService = new ExpenseService();
     const values = req.body;
-    const id  = +req.params.id;
-    const userId = req.user.id
-    const response = await expenseService.updateExpense(id, values, userId)
+    const id = +req.params.id;
+    const userId = req.user.id;
+    const response = await expenseService.updateExpense(id, values, userId);
     ResponseHelpers.updated(res, response);
   })
 );
@@ -269,11 +268,11 @@ router.put(
   verifyToken,
   checkHasPermission('update:expense'),
   wrapAsync(async (req: Request, res: Response) => {
-    const expenseService = new ExpenseService()
+    const expenseService = new ExpenseService();
     const values = req.body;
-    const id  = +req.params.id;
-    const userId = req.user.id
-    const response = await expenseService.updateUserExpense(id, values, userId)
+    const id = +req.params.id;
+    const userId = req.user.id;
+    const response = await expenseService.updateUserExpense(id, values, userId);
     ResponseHelpers.updated(res, response);
   })
 );
@@ -304,10 +303,10 @@ router.delete(
   verifyToken,
   checkHasPermission('delete:expense'),
   wrapAsync(async (req: Request, res: Response) => {
-    const expenseService = new ExpenseService()
-    const id  = +req.params.id;
+    const expenseService = new ExpenseService();
+    const id = +req.params.id;
     const userId = req.user.id;
-    const response = await expenseService.deleteByUser(id, userId)
+    const response = await expenseService.deleteByUser(id, userId);
     ResponseHelpers.deleted(res, response);
   })
 );
@@ -339,9 +338,9 @@ router.delete(
   verifyToken,
   checkHasPermission('delete:anyexpense'),
   wrapAsync(async (req: Request, res: Response) => {
-    const expenseService = new ExpenseService()
-    const id  = +req.params.id;
-    const response = await expenseService.deleteById(id)
+    const expenseService = new ExpenseService();
+    const id = +req.params.id;
+    const response = await expenseService.deleteById(id);
     ResponseHelpers.deleted(res, response);
   })
 );
