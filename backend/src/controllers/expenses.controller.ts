@@ -68,8 +68,7 @@ router.get(
   checkHasPermission('read:allbyuser'),
   wrapAsync(async (req: Request, res: Response) => {
     const expenseService = new ExpenseService()
-    const filter = {where: {userId: req.user.id}}
-    const response = await expenseService.findAll(filter)
+    const response = await expenseService.allExpensesByUser(req.user)
     ResponseHelpers.ok(res, response);
   })
 );

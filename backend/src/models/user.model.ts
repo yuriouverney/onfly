@@ -1,6 +1,7 @@
-import { Model, Table, Scopes, Column, DataType, BeforeCreate, BeforeSave, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Model, Table, Scopes, Column, DataType, BeforeCreate, BeforeSave, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
 import bcrypt from 'bcryptjs';
 import Profile from './profile.model';
+import Expense from './expense.model';
 
 @Scopes(() => ({
   withPass: {
@@ -63,6 +64,10 @@ export default class User extends Model<User> {
 
   @BelongsTo(() => Profile)
   Profile!: Profile;
+
+  @HasMany(() => Expense)
+  Expenses!: Expense[];
+  declare getExpenses: () => Promise<Expense[]>;
 
   @BeforeCreate
   @BeforeSave

@@ -63,7 +63,8 @@ export default class Expense extends Model<Expense> {
   declare updatedBy: number;
 
   @BelongsTo(() => User)
-  user!: User;
+  User!: User;
+  declare getUser: () => Promise<User>;
 
   @BeforeCreate
   static async validateUser(expense: Expense) {
@@ -73,11 +74,11 @@ export default class Expense extends Model<Expense> {
     }
   }
 
-  
+ 
   @AfterCreate
   static async sendEmailAfterCreate(expense: Expense): Promise<void> {
     if (expense.userId) {
-      const user = await expense.$get('user');
+      const user = await expense.getUser();
       if (user && user.email) {
         await sendEmail(user.email, 'Expense Registered', `A new expense was registered: ${expense.description}`);
       }

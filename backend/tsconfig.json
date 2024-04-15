@@ -6,7 +6,8 @@
      "strict": true,
      "experimentalDecorators": true,
      "types": ["jest"],
-     "typeRoots" : ["./src/**/*", "./src/types", "./node_modules/@types"]
+     "typeRoots" : ["./src/**/*", "./src/types", "./node_modules/@types"],
+     "strictNullChecks": false,
   },
   "include": [
      "./src/**/*",

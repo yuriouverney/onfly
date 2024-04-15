@@ -8,7 +8,6 @@ export const helmetConfig ={
         imgSrc: ["'self'", 'data:'],
         connectSrc: ["'self'"],
         objectSrc: ["'none'"],
-        upgradeInsecureRequests: [],
       }
     },
     xssFilter: true,
