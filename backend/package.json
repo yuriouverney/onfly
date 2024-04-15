@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/api.ts",
-    "scripts": {
+  "scripts": {
     "start": "npm run start:dev",
     "start:dev": "cross-env NODE_ENV=dev nodemon --exec ts-node src/server.ts",
     "test": "cross-env NODE_ENV=test jest --runInBand",
@@ -22,6 +22,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.4",
     "express": "^4.18.2",
+    "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.30.1",
     "mysql2": "^3.9.1",
